@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+</head>
+
+<body>
+    <h1>Sleep Tracker</h1>
+    <label for="date-input">Select Date:</label>
+    <input type="date" id="date-input">
+    <br><br>
+    <label for="sleep-time-input">Enter Sleep Time:</label>
+    <input type="time" id="sleep-time-input">
+    <br><br>
+    <label for="wake-time-input">Enter Wake-up Time:</label>
+    <input type="time" id="wake-time-input">
+    <br><br>
+    <button onclick="addSleepEntry()">Add Entry</button>
+    <br><br>
+    <canvas id="sleepChart"></canvas>
+
+    <script src="script2.js"></script>
+</body>
+
+</html>
