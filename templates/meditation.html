@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mental Well-being Website</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #2b2b2b;
+    color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.container {
+    text-align: center;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #3c3c3c;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+select, button {
+    width: 100%;
+    height: 40px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+button {
+    background-color: #008CBA; /* Blue */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+button:hover {
+    background-color: #007B9A; /* Darker blue */
+}
+a {
+    color: #f5f5f5; /* White */
+    text-decoration: none;
+}
+a:visited {
+    color: #f5f5f5; /* White */
+}
+a:hover {
+    color: #dddddd; /* Lighter white */
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Learn Meditation</h1>
+        <p>Select the type of meditation video you want to watch:</p>
+        <select id="videoType" name="videoType">
+            <option value="guided">Guided Meditation</option>
+            <option value="affirmation">Positive Affirmation</option>
+            <option value="binaural">Binaural Beats Relaxation</option>
+            <option value="breath">Breath Exercise</option>
+            <option value="progressive">Progressive Relaxation</option>
+            <option value="sleep">Sleep Therapy</option>
+            <option value="mindfulness">Mind Therapy</option>
+            <option value="transcendental">Transcendental Therapy</option>
+            <option value="lovingkindness">Lovingkindness Therapy</option>
+        </select>
+        <button onclick="showVideo()">Show Video</button>
+        <div id="videoContainer"></div>
+    </div>
+    <script>
+        function showVideo() {
+            var videoType = document.getElementById("videoType").value;
+            var videoContainer = document.getElementById("videoContainer");
+            var embedCode = '';
+            switch(videoType) {
+                case "guided":
+                    embedCode = '<h2>Guided Meditation Videos:</h2><iframe width="560" height="315" src="https://www.youtube.com/embed/H37BDUyCEe0?si=cD-gy_NMk9JCLN3W" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                    break;
+                case "affirmation":
+                    embedCode = '<h2>Positive Affirmation Meditation Videos:</h2><iframe width="560" height="315" src="https://www.youtube.com/embed/exMJ6lwSo34?si=Dd22h6fo8Qe-xArz" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><iframe width="560" height="315" src="https://www.youtube.com/embed/a7AFowdZul0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                    break;
+                case "binaural":
+                    embedCode = '<h2>Binaural Beats Relaxation Meditation Videos:</h2><iframe width="560" height="315" src="https://www.youtube.com/embed/1_G60OdEzXs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><iframe width="560" height="315" src="https://www.youtube.com/embed/L7odaNMTzFk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><iframe width="560" height="315" src="https://www.youtube.com/embed/TOWO7IrchyI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                    break;
+                case "breath":
+                    embedCode = '<h2>Breath Exercise Meditation Videos:</h2><iframe width="560" height="315" src="https://www.youtube.com/embed/lPJAtHWq08k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><iframe width="560" height="315" src="https://www.youtube.com/embed/LiUnFJ8P4gM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><iframe width="560" height="315" src="https://www.youtube.com/embed/Vi0_7idqcFI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                    break;
+                case "progressive":
+                    embedCode = '<h2>Progressive Relaxation Meditation Videos:</h2><iframe width="560" height="315" src="https://www.youtube.com/embed/D7QoBABZu8k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><iframe width="560" height="315" src="https://www.youtube.com/embed/GZ9PHsbt-m4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                    break;
+                case "sleep":
+                    embedCode = '<h2>Sleep Therapy Meditation Videos:</h2><iframe width="560" height="315" src="https://www.youtube.com/embed/CAGUVH_yIRE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><iframe width="560" height="315" src="https://www.youtube.com/embed/wkGWwyrCoRs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                    break;
+                case "mindfulness":
+                    embedCode = '<h2>Mindfulness Meditation Videos:</h2><iframe width="560" height="315" src="https://www.youtube.com/embed/j7FOk5zDxaw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><iframe width="560" height="315" src="https://www.youtube.com/embed/9c_Bv_FBE-c" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><iframe width="560" height="315" src="https://www.youtube.com/embed/k0Pvo8a9pTU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                    break;
+                case "transcendental":
+                    embedCode = '<h2>Transcendental Meditation Videos:</h2><iframe width="560" height="315" src="https://www.youtube.com/embed/Em3XplqnoF4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                    break;
+                case "lovingkindness":
+                    embedCode = '<h2>Loving Kindness Meditation Videos:</h2><iframe width="560" height="315" src="https://www.youtube.com/embed/1eLKEuJkggw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><iframe width="560" height="315" src="https://www.youtube.com/embed/9cxtdiXBQDk?si=IcKIiHgzBnOemDw4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                    break;
+            }
+            videoContainer.innerHTML = embedCode;
+        }
+    </script>
+    
+</body>
+</html>

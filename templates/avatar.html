@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avatar Unlock</title>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .avatar-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 20px;
+    }
+
+    .avatar {
+        width: 100px; /* Size of a passport-sized photo */
+        height: 100px; /* Size of a passport-sized photo */
+        cursor: pointer;
+        position: relative;
+        text-align: center;
+    }
+
+    .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensure the entire image is visible */
+    }
+
+    .avatar-text {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .popup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f5f5f5;
+    color: #2b2b2b;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.popup button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #008CBA; /* Blue */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.popup button:hover {
+    background-color: #007B9A; /* Darker blue */
+}
+
+</style>
+</head>
+<body>
+
+<!-- Avatars -->
+<div class="avatar-container">
+    <div class="avatar" onclick="showPopup('avatar1')">
+        <img src="{{ url_for('static', filename='avatar1.png') }}" alt="Avatar 1">
+        <div class="avatar-text">Avatar 1</div>
+    </div>
+    <div class="avatar" onclick="showPopup('avatar2')">
+        <img src="{{ url_for('static', filename='avatar2.png') }}" alt="Avatar 2">
+        <div class="avatar-text">Avatar 2</div>
+    </div>
+    <div class="avatar" onclick="showPopup('avatar3')">
+        <img src="{{ url_for('static', filename='avatar3.png') }}" alt="Avatar 3">
+        <div class="avatar-text">Avatar 3</div>
+    </div>
+    <div class="avatar" onclick="showPopup('avatar4')">
+        <img src="{{ url_for('static', filename='avatar4.png') }}" alt="Avatar 4">
+        <div class="avatar-text">Avatar 4</div>
+    </div>
+    <div class="avatar" onclick="showPopup('avatar5')">
+        <img src="{{ url_for('static', filename='avatar5.png') }}" alt="Avatar 5">
+        <div class="avatar-text">Avatar 5</div>
+    </div>
+    <div class="avatar" onclick="showPopup('avatar6')">
+        <img src="{{ url_for('static', filename='avatar6.png') }}" alt="Avatar 6">
+        <div class="avatar-text">Avatar 6</div>
+    </div>
+    <div class="avatar" onclick="showPopup('avatar7')">
+        <img src="{{ url_for('static', filename='avatar7.png') }}" alt="Avatar 7">
+        <div class="avatar-text">Avatar 7</div>
+    </div>
+    <div class="avatar" onclick="showPopup('avatar8')">
+        <img src="{{ url_for('static', filename='avatar8.png') }}" alt="Avatar 8">
+        <div class="avatar-text">Avatar 8</div>
+    </div>
+    <div class="avatar" onclick="showPopup('avatar9')">
+        <img src="{{ url_for('static', filename='avatar9.png') }}" alt="Avatar 9">
+        <div class="avatar-text">Avatar 9</div>
+    </div>
+</div>
+
+<script>
+    function showPopup(avatar) {
+        var popup = document.createElement('div');
+        popup.innerHTML = '<div class="popup"><h2>You selected ' + avatar + '</h2><p>Do you want to choose this avatar?</p><button onclick="chooseAvatar(\'' + avatar + '\')">Yes</button><button onclick="closePopup()">No</button></div><div class="overlay" onclick="closePopup()"></div>';
+        document.body.appendChild(popup);
+    }
+
+    function closePopup() {
+        var popup = document.querySelector('.popup');
+        var overlay = document.querySelector('.overlay');
+        document.body.removeChild(popup);
+        document.body.removeChild(overlay);
+    }
+
+    function chooseAvatar(avatar) {
+        alert('You chose ' + avatar + '!');
+        closePopup();
+    }
+</script>
+
+
+</body>
+</html>

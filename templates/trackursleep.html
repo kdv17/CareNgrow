@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            gap: 20px;
+        }
+        input[type="time"], input[type="date"] {
+            margin: 10px 0;
+            width: 200px; /* Increase input width */
+            height: 30px; /* Increase input height */
+            padding: 5px; /* Add padding */
+        }
+        button {
+            cursor: pointer;
+        }
+        #datePickerContainer {
+            display: none;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Sleep Tracker</h1>
+    <div>
+        <button id="datePickerButton">Select Date</button>
+        <div id="datePickerContainer" style="display: none;">
+            <input type="date" id="date">
+        </div>
+    </div>
+    <label for="sleepTime">Sleeping Time:</label>
+    <input type="time" id="sleepTime">
+    <label for="wakeTime">Waking Time:</label>
+    <input type="time" id="wakeTime">
+    <button onclick="addData()">Add Data</button>
+    <canvas id="myChart"></canvas>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Hours of Sleep',
+                    data: [],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Function to show the date picker
+        document.getElementById('datePickerButton').addEventListener('click', function() {
+            var container = document.getElementById('datePickerContainer');
+            container.style.display = container.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Function to add data
+        function addData() {
+            var date = document.getElementById('date').value;
+            var sleepTime = document.getElementById('sleepTime').value;
+            var wakeTime = document.getElementById('wakeTime').value;
+            var hoursOfSleep = (new Date('1970-01-01T' + wakeTime) - new Date('1970-01-01T' + sleepTime)) / 36e5;
+            if(hoursOfSleep < 0) hoursOfSleep += 24;
+            myChart.data.labels.push(date);
+            myChart.data.datasets[0].data.push(hoursOfSleep);
+            myChart.update();
+            // Hide the date picker after adding data
+            document.getElementById('datePickerContainer').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+

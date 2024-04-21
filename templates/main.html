@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mental Well-being App</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="top-bar">
+      <span class="thought-of-the-day" id="thought">Hello-user!</span>
+      <img src="{{ url_for('static', filename='avatar1.png') }}" alt="Avatar 1">
+      <a href="/avatar" id="addFriendButton">Choose Avatars</a>
+    </div>
+    <div class="center-area">
+        <a href="/chatbot" class="aicompanion">
+            <img src="{{ url_for('static', filename='ai-companion.jpg') }}" alt="ai-companion icon"> 
+        </a>
+    </div>
+    <div class="feature-container">
+      <a href="/planner" class="feature-item">
+        <img src="{{ url_for('static', filename='day-planner.png') }}" alt="Day Planner Icon">
+      </a>
+      <a href="/trackursleep" class="feature-item">
+        <img src="{{ url_for('static', filename='track-sleep.png') }}" alt="Track Sleep Icon">
+      </a>
+      <a href="/feeling" class="feature-item">
+        <img src="{{ url_for('static', filename='feelings.png') }}" alt="How did you feel today Icon">
+      </a>
+      <a href="meditation" class="feature-item">
+        <img src="{{ url_for('static', filename='meditation.png') }}" alt="Laem Meditation Icon">
+      </a>
+      <a href="/settings" class="feature-item">
+        <img src="{{ url_for('static', filename='settings.png') }}" alt="Settings Icon">
+      </a>
+    </div>
+    
+  </div>
+  <script>
+    var goodThoughts = [
+        "Every day may not be good, but there's something good in every day.",
+        "The only way to do great work is to love what you do.",
+        "Believe you can and you're halfway there.",
+        "It always seems impossible until it's done.",
+        "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+        "The only limit to our realization of tomorrow will be our doubts of today.",
+        "Don't watch the clock; do what it does. Keep going.",
+        "The only person you should try to be better than is the person you were yesterday.",
+        "With the new day comes new strength and new thoughts.",
+        "It does not matter how slowly you go as long as you do not stop."
+    ];
+
+    // Function to display a random thought
+    function randomThought() {
+        var randomIndex = Math.floor(Math.random() * goodThoughts.length);
+        var thought = goodThoughts[randomIndex];
+        document.getElementById('thought').innerText = thought;
+    }
+
+    // Display a random thought when the page loads
+    randomThought();
+  </script>
+</body>
+</html>
+
+
+

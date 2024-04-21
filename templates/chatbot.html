@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #110f0f;
+        }
+        h1{
+          color: #faeeee;  
+        }
+
+        .chat-container {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            height: 400px;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-y: scroll;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .user {
+            background-color: #007bff;
+            color: #fff;
+            text-align: right;
+        }
+
+        .bot {
+            background-color: #333;
+            color: #fff;
+            text-align: left;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Chatbot</h1>
+    <div class="chat-container" id="chat-box"></div>
+    <input type="text" id="user-input" placeholder="Type your message...">
+    <button id="send-button">Send</button>
+
+    <script>
+        document.getElementById('send-button').addEventListener('click', sendMessage);
+        document.getElementById('user-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        const responses = {
+            'hello': ['Hello! How can I help you today?', 'Hi there! What can I do for you?'],
+            'how are you': ['I\'m just a chatbot, but thanks for asking! How can I assist you?', 'I don\'t have feelings, but I\'m here to help.'],
+            'help': ['Sure, I can help. What do you need assistance with?', 'Of course, I\'m here to assist you.'],
+            'bye': ['Goodbye! Have a great day.', 'See you later!'],
+            'sad': ['I\'m sorry to hear that. Maybe watching a comedy could cheer you up?', 'Cheer up! How about watching a feel-good movie?'],
+            'happy': ['That\'s great to hear! Maybe you\'d enjoy a light-hearted comedy.', 'Awesome! How about celebrating with a classic movie?'],
+            'meditation': ['Meditation can be a great way to relax. Have you tried guided meditation?', 'Meditation is excellent for clearing the mind and reducing stress.'],
+            'sleep': ['Getting enough sleep is crucial for your well-being. Try to maintain a regular sleep schedule.', 'A good night\'s sleep can do wonders for your mood and health.'],
+            'sleep time': ['Getting enough sleep is important for your health. Try to get at least 7-8 hours of sleep each night.', 'A regular sleep schedule can help improve the quality of your sleep.'],
+            'exercise': ['Exercise is great for both your physical and mental health. Try to incorporate regular exercise into your routine.', 'Regular exercise can help boost your mood and energy levels.'],
+            'nutrition': ['Eating a balanced diet is important for your overall health. Try to eat a variety of fruits, vegetables, and whole grains.', 'A healthy diet can help improve your energy levels and overall well-being.'],
+            'stress': ['Stress is a normal part of life, but too much stress can be harmful. Try to find healthy ways to manage stress, such as meditation or exercise.', 'Stress management techniques like deep breathing or mindfulness can be helpful in reducing stress.'],
+            'relaxation': ['Finding time to relax is important for your mental well-being. Try to set aside some time each day to unwind and relax.', 'Relaxation techniques like deep breathing or listening to music can help reduce stress and promote relaxation.'],
+            'motivation': ['Finding motivation can sometimes be challenging. Try setting small, achievable goals to help stay motivated.', 'Motivation can come from within. Think about why you started and focus on the positive outcomes.'],
+            'productivity': ['Being productive can help you feel accomplished. Try breaking tasks into smaller, manageable steps to stay productive.', 'Staying organized and prioritizing tasks can help improve your productivity.'],
+            'creativity': ['Expressing your creativity can be a great way to relieve stress and boost your mood. Try engaging in creative activities like painting or writing.', 'Creativity is a wonderful way to explore new ideas and perspectives. Embrace your creativity!'],
+            'comedy movie': ['Superbad', 'The Hangover', 'Bridesmaids', 'Anchorman', 'Pitch Perfect'],
+            'drama movie': ['The Shawshank Redemption', 'Forrest Gump', 'The Godfather', 'Schindler\'s List', 'The Green Mile'],
+            'action movie': ['The Dark Knight', 'Inception', 'Mad Max: Fury Road', 'Die Hard', 'Gladiator'],
+            'thriller movie': ['Gone Girl', 'The Silence of the Lambs', 'Se7en', 'Prisoners', 'Shutter Island'],
+            'horror movie': ['The Exorcist', 'The Shining', 'Get Out', 'A Nightmare on Elm Street', 'Psycho'],
+            'romance movie': ['The Notebook', 'Pride and Prejudice', 'La La Land', 'Titanic', 'Before Sunrise'],
+            'sci-fi movie': ['Blade Runner 2049', 'Interstellar', 'The Matrix', 'Arrival', 'Ex Machina'],
+            'fantasy movie': ['The Lord of the Rings', 'Harry Potter series', 'Pan\'s Labyrinth', 'The Chronicles of Narnia', 'Stardust'],
+            'animation movie': ['Toy Story', 'Up', 'Finding Nemo', 'WALL-E', 'The Lion King'],
+            'documentary movie': ['Fahrenheit 9/11', 'Bowling for Columbine', 'March of the Penguins', 'Blackfish', 'Won\'t You Be My Neighbor?']
+
+        };
+
+        function sendMessage() {
+            const userInput = document.getElementById('user-input').value.trim();
+            if (userInput !== '') {
+                appendMessage('You', userInput);
+                document.getElementById('user-input').value = '';
+
+                // Simulate bot response based on input
+                setTimeout(function () {
+                    let botResponse;
+                    for (const key in responses) {
+                        if (userInput.toLowerCase().includes(key)) {
+                            const options = responses[key];
+                            botResponse = options[Math.floor(Math.random() * options.length)];
+                            break;
+                        }
+                    }
+                    if (!botResponse) {
+                        botResponse = 'I am a chatbot. How can I assist you today?';
+                    }
+                    appendMessage('Bot', botResponse);
+                }, 500);
+            }
+        }
+
+
+        function appendMessage(sender, message) {
+            const chatBox = document.getElementById('chat-box');
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.classList.add(sender.toLowerCase());
+            messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            chatBox.appendChild(messageElement);
+            chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom of chat
+        }
+    </script>
+</body>
+
+</html>

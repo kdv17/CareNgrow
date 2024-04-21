@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .emoji {
+            font-size: 30px;
+            cursor: pointer;
+        }
+        input[type="date"] {
+            margin: 10px 0;
+            width: 200px; /* Increase input width */
+            height: 30px; /* Increase input height */
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>How did you feel today?</h1>
+    <button id="datePickerButton">Select Date</button>
+    <div id="datePickerContainer" style="display: none;">
+        <input type="date" id="date">
+    </div>
+    <div id="emojis">
+        <span class="emoji" onclick="addData(1)">😞</span>
+        <span class="emoji" onclick="addData(2)">😐</span>
+        <span class="emoji" onclick="addData(3)">😊</span>
+        <span class="emoji" onclick="addData(4)">😀</span>
+        <span class="emoji" onclick="addData(5)">😁</span>
+    </div>
+    <canvas id="myChart"></canvas>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Emotion Rating',
+                    data: [],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 5
+                    }
+                }
+            }
+        });
+
+        // Function to show the date picker
+        document.getElementById('datePickerButton').addEventListener('click', function() {
+            document.getElementById('datePickerContainer').style.display = 'block';
+        });
+
+        // Function to add data
+        function addData(rating) {
+            var date = document.getElementById('date').value;
+            var index = myChart.data.labels.indexOf(date);
+            if(index === -1) {
+                myChart.data.labels.push(date);
+                myChart.data.datasets[0].data.push(rating);
+            } else {
+                myChart.data.datasets[0].data[index] = rating;
+            }
+            myChart.update();
+            // Hide the date picker after adding data
+            document.getElementById('datePickerContainer').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
